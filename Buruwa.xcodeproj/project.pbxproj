@@ -8,12 +8,18 @@
 
 /* Begin PBXBuildFile section */
 		4D18979F223F486B0089A8F4 /* Buruwa.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D18979D223F486B0089A8F4 /* Buruwa.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4D1897A8223F48C00089A8F4 /* Parcel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1897A5223F48BF0089A8F4 /* Parcel.swift */; };
+		4D1897A9223F48C00089A8F4 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1897A6223F48C00089A8F4 /* Store.swift */; };
+		4D1897AA223F48C00089A8F4 /* Courier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1897A7223F48C00089A8F4 /* Courier.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		4D18979A223F486B0089A8F4 /* Buruwa.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Buruwa.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D18979D223F486B0089A8F4 /* Buruwa.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Buruwa.h; sourceTree = "<group>"; };
 		4D18979E223F486B0089A8F4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4D1897A5223F48BF0089A8F4 /* Parcel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Parcel.swift; path = Buruwa/Parcel.swift; sourceTree = "<group>"; };
+		4D1897A6223F48C00089A8F4 /* Store.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Store.swift; path = Buruwa/Store.swift; sourceTree = "<group>"; };
+		4D1897A7223F48C00089A8F4 /* Courier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Courier.swift; path = Buruwa/Courier.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -30,6 +36,9 @@
 		4D189790223F486B0089A8F4 = {
 			isa = PBXGroup;
 			children = (
+				4D1897A7223F48C00089A8F4 /* Courier.swift */,
+				4D1897A5223F48BF0089A8F4 /* Parcel.swift */,
+				4D1897A6223F48C00089A8F4 /* Store.swift */,
 				4D18979C223F486B0089A8F4 /* Buruwa */,
 				4D18979B223F486B0089A8F4 /* Products */,
 			);
@@ -95,6 +104,7 @@
 				TargetAttributes = {
 					4D189799223F486B0089A8F4 = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1010;
 					};
 				};
 			};
@@ -130,6 +140,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4D1897A9223F48C00089A8F4 /* Store.swift in Sources */,
+				4D1897A8223F48C00089A8F4 /* Parcel.swift in Sources */,
+				4D1897AA223F48C00089A8F4 /* Courier.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -261,6 +274,7 @@
 		4D1897A3223F486B0089A8F4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
@@ -278,6 +292,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = nyasa.Buruwa;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -286,6 +301,7 @@
 		4D1897A4223F486B0089A8F4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
