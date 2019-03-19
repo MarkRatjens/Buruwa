@@ -17,9 +17,9 @@
 		4D18979A223F486B0089A8F4 /* Buruwa.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Buruwa.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D18979D223F486B0089A8F4 /* Buruwa.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Buruwa.h; sourceTree = "<group>"; };
 		4D18979E223F486B0089A8F4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4D1897A5223F48BF0089A8F4 /* Parcel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Parcel.swift; path = Buruwa/Parcel.swift; sourceTree = "<group>"; };
-		4D1897A6223F48C00089A8F4 /* Store.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Store.swift; path = Buruwa/Store.swift; sourceTree = "<group>"; };
-		4D1897A7223F48C00089A8F4 /* Courier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Courier.swift; path = Buruwa/Courier.swift; sourceTree = "<group>"; };
+		4D1897A5223F48BF0089A8F4 /* Parcel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parcel.swift; sourceTree = "<group>"; };
+		4D1897A6223F48C00089A8F4 /* Store.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
+		4D1897A7223F48C00089A8F4 /* Courier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Courier.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,9 +36,6 @@
 		4D189790223F486B0089A8F4 = {
 			isa = PBXGroup;
 			children = (
-				4D1897A7223F48C00089A8F4 /* Courier.swift */,
-				4D1897A5223F48BF0089A8F4 /* Parcel.swift */,
-				4D1897A6223F48C00089A8F4 /* Store.swift */,
 				4D18979C223F486B0089A8F4 /* Buruwa */,
 				4D18979B223F486B0089A8F4 /* Products */,
 			);
@@ -55,6 +52,9 @@
 		4D18979C223F486B0089A8F4 /* Buruwa */ = {
 			isa = PBXGroup;
 			children = (
+				4D1897A7223F48C00089A8F4 /* Courier.swift */,
+				4D1897A5223F48BF0089A8F4 /* Parcel.swift */,
+				4D1897A6223F48C00089A8F4 /* Store.swift */,
 				4D18979D223F486B0089A8F4 /* Buruwa.h */,
 				4D18979E223F486B0089A8F4 /* Info.plist */,
 			);
