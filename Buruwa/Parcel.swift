@@ -1,3 +1,5 @@
+import Foundation
+
 extension REST {
 	open class Parcel<D: Decodable>: NSObject {
 		open func resources(from data: Data) -> [D]? {
