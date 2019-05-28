@@ -4,13 +4,13 @@ import UIKit
 extension REST {
 	public class SafeCourier<D: Decodable>: Courier<D> {
 		public func get(parcel: Parcel<D>, on path: String, with parameters: Serialization, then complete: @escaping ([D]) -> Void) {
-			get(parcel: parcel, on: path, with: parameters, then: { (result: [D]?, response: URLResponse?, error: Error?) in
+			get(parcel: parcel, on: path, with: parameters, then: { (result, response, error) in
 				if let r = result { complete(r) }
 			})
 		}
 		
 		public func post(parcel: Parcel<D>, on path: String, with parameters: Serialization, then complete: @escaping ([D]) -> Void) {
-			post(parcel: parcel, on: path, with: parameters, then: { (result: [D]?, response: URLResponse?, error: Error?) in
+			post(parcel: parcel, on: path, with: parameters, then: { (result, response, error) in
 				if let r = result { complete(r) }
 			})
 		}
@@ -45,7 +45,7 @@ extension REST {
 		func carry(parcel: Parcel<D>, for request: URLRequest, then complete: @escaping ([D]?, URLResponse?, Error?) -> Void) {
 			let c = URLSessionConfiguration.ephemeral
 			let s = URLSession(configuration: c, delegate: nil, delegateQueue: OperationQueue.main)
-			let t = s.dataTask(with: request, completionHandler: { (data: Data?, response: URLResponse?, error: Error?) -> Void in
+			let t = s.dataTask(with: request, completionHandler: { data, response, error in
 				if error != nil { print("Buruwa.REST Error: \(error!.localizedDescription)") }
 				
 				guard let d = data else {
