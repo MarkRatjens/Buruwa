@@ -7,9 +7,15 @@ extension REST {
 				let s = try decoder.decode(D.self, from: data)
 				return [s]
 			}
-			catch let error {
-				print(error)
-				return nil
+			catch {
+				do {
+					let s = try decoder.decode([D].self, from: data)
+					return s
+				}
+				catch let error {
+					print(error)
+					return nil
+				}
 			}
 		}
 		
