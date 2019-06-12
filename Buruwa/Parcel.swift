@@ -8,6 +8,7 @@ extension REST {
 				return [s]
 			}
 			catch {
+				print("JSON root is not a valid object... continuing to process as an Array")
 				do {
 					let s = try decoder.decode([D].self, from: data)
 					return s

@@ -41,11 +41,12 @@ extension REST {
 		override public init() {}
 	}
 
+	
 	public class Courier<D: Decodable> {
 		func carry(parcel: Parcel<D>, for request: URLRequest, then complete: @escaping ([D]?, URLResponse?, Error?) -> Void) {
 			let c = URLSessionConfiguration.ephemeral
 			let s = URLSession(configuration: c, delegate: nil, delegateQueue: OperationQueue.main)
-			let t = s.dataTask(with: request, completionHandler: { data, response, error in
+			let t = s.dataTask(with: request) { data, response, error in
 				if error != nil { print("Buruwa.REST Error: \(error!.localizedDescription)") }
 				
 				guard let d = data else {
@@ -56,7 +57,7 @@ extension REST {
 				
 				let r = parcel.resources(from: d)
 				complete(r, response, error)
-			})
+			}
 			t.resume()
 		}
 	}
@@ -72,5 +73,12 @@ extension Serialization {
 			let v = (String(describing: $0.value)).addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
 			return "\(p)=\(v)"
 			}.joined(separator: "&")
+	}
+}
+
+
+extension String {
+	public var httpSafe: String {
+		return addingPercentEncoding(withAllowedCharacters: .urlPathAllowed)!
 	}
 }
