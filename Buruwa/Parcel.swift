@@ -4,19 +4,17 @@ extension REST {
 	open class Parcel<D: Decodable>: NSObject {
 		open func resources(from data: Data) -> [D]? {
 			do {
-				let s = try decoder.decode(D.self, from: data)
-				return [s]
-			}
-			catch {
-				print("JSON root is not a valid object... continuing to process as an Array")
-				do {
+				if String(data: data, encoding: .utf8)!.first == "[" {
 					let s = try decoder.decode([D].self, from: data)
 					return s
+				} else {
+					let s = try decoder.decode(D.self, from: data)
+					return [s]
 				}
-				catch let error {
-					print(error)
-					return nil
-				}
+			}
+			catch let error {
+				print(error)
+				return nil
 			}
 		}
 		

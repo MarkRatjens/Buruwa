@@ -4,13 +4,13 @@ import UIKit
 extension REST {
 	public class SafeCourier<D: Decodable>: Courier<D> {
 		public func get(parcel: Parcel<D>, on path: String, with parameters: Serialization, then complete: @escaping ([D]) -> Void) {
-			get(parcel: parcel, on: path, with: parameters, then: { (result, response, error) in
+			get(parcel: parcel, on: path, with: parameters, then: { result, response, error in
 				if let r = result { complete(r) }
 			})
 		}
 		
 		public func post(parcel: Parcel<D>, on path: String, with parameters: Serialization, then complete: @escaping ([D]) -> Void) {
-			post(parcel: parcel, on: path, with: parameters, then: { (result, response, error) in
+			post(parcel: parcel, on: path, with: parameters, then: { result, response, error in
 				if let r = result { complete(r) }
 			})
 		}
