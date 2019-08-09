@@ -1,14 +1,14 @@
 import Foundation
 
 extension REST {
-	open class Parcel<D: Decodable>: NSObject {
-		open func resources(from data: Data) -> [D]? {
+	open class Parcel: NSObject {
+		open func resources<R: Codable>(from data: Data) -> [R]? {
 			do {
 				if String(data: data, encoding: .utf8)!.first == "[" {
-					let s = try decoder.decode([D].self, from: data)
+					let s = try decoder.decode([R].self, from: data)
 					return s
 				} else {
-					let s = try decoder.decode(D.self, from: data)
+					let s = try decoder.decode(R.self, from: data)
 					return [s]
 				}
 			}

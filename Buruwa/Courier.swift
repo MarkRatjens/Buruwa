@@ -2,20 +2,20 @@ import Foundation
 import UIKit
 
 extension REST {
-	public class SafeCourier<D: Decodable>: Courier<D> {
-		public func get(parcel: Parcel<D>, on path: String, with parameters: Serialization, then complete: @escaping ([D]) -> Void) {
-			get(parcel: parcel, on: path, with: parameters, then: { result, response, error in
+	public class SafeCourier: Courier {
+		public func get<R: Codable>(parcel: Parcel, on path: String, with parameters: Serialization, then complete: @escaping ([R]) -> Void) {
+			get(parcel: parcel, on: path, with: parameters, then: { (result: [R]?, response: URLResponse?, error: Error?) in
 				if let r = result { complete(r) }
 			})
 		}
 		
-		public func post(parcel: Parcel<D>, on path: String, with parameters: Serialization, then complete: @escaping ([D]) -> Void) {
-			post(parcel: parcel, on: path, with: parameters, then: { result, response, error in
+		public func post<R: Codable>(parcel: Parcel, on path: String, with parameters: Serialization, then complete: @escaping ([R]) -> Void) {
+			post(parcel: parcel, on: path, with: parameters, then: { (result: [R]?, response: URLResponse?, error: Error?) in
 				if let r = result { complete(r) }
 			})
 		}
 
-		private func get(parcel: Parcel<D>, on path: String, with parameters: Serialization, then complete: @escaping ([D]?, URLResponse?, Error?) -> Void) {
+		private func get<R: Codable>(parcel: Parcel, on path: String, with parameters: Serialization, then complete: @escaping ([R]?, URLResponse?, Error?) -> Void) {
 			let s = path + "?" + parameters.asHttpQuery
 			var r = URLRequest(url: parcel.path(s))
 			r.httpMethod = "GET"
@@ -26,7 +26,7 @@ extension REST {
 			carry(parcel: parcel, for: r, then: complete)
 		}
 
-		private func post(parcel: Parcel<D>, on path: String, with parameters: Serialization, then complete: @escaping ([D]?, URLResponse?, Error?) -> Void) {
+		private func post<R: Codable>(parcel: Parcel, on path: String, with parameters: Serialization, then complete: @escaping ([R]?, URLResponse?, Error?) -> Void) {
 			var r = URLRequest(url: parcel.path(path))
 			r.httpMethod = "POST"
 			
@@ -42,8 +42,8 @@ extension REST {
 	}
 
 	
-	public class Courier<D: Decodable> {
-		func carry(parcel: Parcel<D>, for request: URLRequest, then complete: @escaping ([D]?, URLResponse?, Error?) -> Void) {
+	public class Courier {
+		func carry<R: Codable>(parcel: Parcel, for request: URLRequest, then complete: @escaping ([R]?, URLResponse?, Error?) -> Void) {
 			let c = URLSessionConfiguration.ephemeral
 			let s = URLSession(configuration: c, delegate: nil, delegateQueue: OperationQueue.main)
 			let t = s.dataTask(with: request) { data, response, error in
@@ -55,7 +55,7 @@ extension REST {
 					return
 				}
 				
-				let r = parcel.resources(from: d)
+				let r: [R]? = parcel.resources(from: d)
 				complete(r, response, error)
 			}
 			t.resume()
