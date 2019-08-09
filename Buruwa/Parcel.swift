@@ -24,6 +24,8 @@ extension REST {
 			return d
 		}
 
+		public var courier = SafeCourier()
+
 		func path(_ path: String) -> URL {return URL(string: path)! }
 	}
 }
