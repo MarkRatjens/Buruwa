@@ -2,7 +2,7 @@ import Foundation
 
 extension REST {
 	open class Parcel: NSObject {
-		open func resources<R: Codable>(from data: Data) -> [R]? {
+		open func resources<R: Decodable>(from data: Data) -> [R]? {
 			do {
 				if String(data: data, encoding: .utf8)!.first == "[" {
 					let s = try decoder.decode([R].self, from: data)
@@ -18,9 +18,25 @@ extension REST {
 			}
 		}
 		
+		open func data<P: Encodable>(from parameters: P) -> Data? {
+			do {
+				return try encoder.encode(parameters)
+			}
+			catch let error {
+				print(error)
+				return nil
+			}
+		}
+
 		public var decoder: JSONDecoder {
 			let d = JSONDecoder()
 			d.dateDecodingStrategy = .iso8601
+			return d
+		}
+		
+		public var encoder: JSONEncoder {
+			let d = JSONEncoder()
+			d.dateEncodingStrategy = .iso8601
 			return d
 		}
 
