@@ -21,6 +21,12 @@ extension REST {
 			})
 		}
 
+		public func post(parcel: Parcel, on path: String, with parameters: Serialization, then complete: @escaping () -> Void) {
+			post(parcel: parcel, on: path, with: parameters, then: { (response: URLResponse?, error: Error?) in
+				complete()
+			})
+		}
+
 		private func get<R: Decodable>(parcel: Parcel, on path: String, with parameters: Serialization, then complete: @escaping ([R]?, URLResponse?, Error?) -> Void) {
 			let s = path + "?" + parameters.asHttpQuery
 			var r = URLRequest(url: parcel.path(s))
@@ -55,6 +61,18 @@ extension REST {
 			carry(parcel: parcel, for: r, then: complete)
 		}
 
+		private func post(parcel: Parcel, on path: String, with parameters: Serialization, then complete: @escaping (URLResponse?, Error?) -> Void) {
+			var r = URLRequest(url: parcel.path(path))
+			r.httpMethod = "POST"
+			
+			r.addValue("application/json", forHTTPHeaderField: "Content-Type")
+			r.addValue("application/json", forHTTPHeaderField: "Accept")
+			
+			do { r.httpBody = try JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted) }
+			catch let error { print(error.localizedDescription) }
+			carry(parcel: parcel, for: r, then: complete)
+		}
+
 		override public init() {}
 	}
 
@@ -74,6 +92,17 @@ extension REST {
 				
 				let r: [R]? = parcel.resources(from: d)
 				complete(r, response, error)
+			}
+			t.resume()
+		}
+
+		func carry(parcel: Parcel, for request: URLRequest, then complete: @escaping (URLResponse?, Error?) -> Void) {
+			let c = URLSessionConfiguration.ephemeral
+			let s = URLSession(configuration: c, delegate: nil, delegateQueue: OperationQueue.main)
+			let t = s.dataTask(with: request) { data, response, error in
+				if error != nil { print("Buruwa.REST Error: \(error!.localizedDescription)") }
+				
+				complete(response, error)
 			}
 			t.resume()
 		}
